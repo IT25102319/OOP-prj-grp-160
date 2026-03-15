@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Books | Booqe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --midnight: #0f0f1a;
+            --surface: #161625;
+            --gold: #e8c547;
+            --gold-dim: rgba(232, 197, 71, 0.15);
+            --coral: #ff6b6b;
+            --mint: #4ecdc4;
+            --lavender: #a78bfa;
+            --warm-white: #f8f7f4;
+            --cream: #f0ede6;
+            --text-dark: #1a1a2e;
+            --text-body: #555;
+            --text-muted: #999;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-full: 100px;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-md: 0 8px 30px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.12);
+            --ease: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--warm-white);
+            color: var(--text-dark);
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--cream); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+        /* ========== TOP NAV ========== */
+        .topnav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            background: rgba(248, 247, 244, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 0.8rem 3%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .topnav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+
+        .topnav-logo i { color: var(--gold); margin-right: 4px; font-size: 1.3rem; }
+
+        .topnav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .topnav-links a {
+            text-decoration: none;
+            color: var(--text-body);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .topnav-links a:hover,
+        .topnav-links a.active { color: var(--gold); }
+
+        .topnav-right {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .icon-btn {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .icon-btn:hover { background: var(--gold-dim); color: var(--gold); }
+
+        .icon-btn .dot {
+            position: absolute;
+            top: 6px; right: 6px;
+            width: 8px; height: 8px;
+            background: var(--coral);
+            border-radius: 50%;
+        }
+
+        /* ========== LAYOUT ========== */
+        .page-wrapper {
+            display: flex;
+            margin-top: 65px;
+        }
+
+        /* ========== SIDEBAR ========== */
+        .filter-sidebar {
+            width: 280px;
+            padding: 2rem 1.5rem;
+            background: #e7e3e3;
+            border-right: 1px solid rgba(0,0,0,0.05);
+            position: sticky;
+            top: 65px;
+            height: calc(100vh - 65px);
+            overflow-y: auto;
+        }
+
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .filter-header h3 {
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .clear-all {
+            background: none;
+            border: none;
+            color: var(--gold);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .filter-block { margin-bottom: 2rem; }
+
+        .filter-block h4 {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .filter-list { list-style: none; }
+
+        .filter-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .filter-list li:hover { color: var(--gold); }
+
+        .filter-list input[type="checkbox"] {
+            width: 18px; height: 18px;
+            accent-color: var(--gold);
+            cursor: pointer;
+        }
+
+        .filter-list .count {
+            margin-left: auto;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+
+        .price-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .price-row input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid var(--cream);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .price-row input:focus { border-color: var(--gold); }
+
+        .apply-btn {
+            width: 100%;
+            padding: 10px;
+            background: var(--midnight);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .apply-btn:hover { background: var(--gold); color: var(--midnight); }
+
+        /* ========== MAIN CONTENT ========== */
+        .main-area {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .search-wrap {
+            flex: 1;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .search-wrap i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .search-wrap input {
+            width: 100%;
+            padding: 12px 16px 12px 44px;
+            border: 2px solid var(--cream);
+            border-radius: var(--radius-full);
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-wrap input:focus { border-color: var(--gold); }
+
+        .toolbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .result-count { color: var(--text-muted); font-size: 0.9rem; }
+        .result-count strong { color: var(--text-dark); }
+
+        .sort-select {
+            padding: 10px 16px;
+            border: 2px solid var(--cream);
+            border-radius: var(--radius-full);
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        .sort-select:focus { border-color: var(--gold); }
+
+        .view-btns {
+            display: flex;
+            gap: 4px;
+        }
+
+        .view-btns button {
+            width: 38px; height: 38px;
+            border: 2px solid var(--cream);
+            border-radius: var(--radius-sm);
+            background: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--text-muted);
+        }
+
+        .view-btns button.active,
+        .view-btns button:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        /* ========== BOOKS GRID ========== */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .catalog-card {
+            background: #fff;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: all 0.4s var(--ease);
+            cursor: pointer;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .catalog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+
+        .cc-cover {
+            height: 260px;
+            background: linear-gradient(135deg, #f5f5f0, #ebe8e0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cc-img {
+            width: 130px; height: 190px;
+            border-radius: 4px;
+            box-shadow: 6px 6px 20px rgba(0,0,0,0.2);
+            transition: all 0.5s var(--ease);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.4);
+            font-size: 2rem;
+        }
+
+        .catalog-card:hover .cc-img {
+            transform: scale(1.08) rotate(-2deg);
+        }
+
+        /* Color variations */
+        .catalog-card:nth-child(8n+1) .cc-img { background: linear-gradient(145deg, #667eea, #764ba2); }
+        .catalog-card:nth-child(8n+2) .cc-img { background: linear-gradient(145deg, #f093fb, #f5576c); }
+        .catalog-card:nth-child(8n+3) .cc-img { background: linear-gradient(145deg, #4facfe, #00f2fe); }
+        .catalog-card:nth-child(8n+4) .cc-img { background: linear-gradient(145deg, #43e97b, #38f9d7); }
+        .catalog-card:nth-child(8n+5) .cc-img { background: linear-gradient(145deg, #fa709a, #fee140); }
+        .catalog-card:nth-child(8n+6) .cc-img { background: linear-gradient(145deg, #a18cd1, #fbc2eb); }
+        .catalog-card:nth-child(8n+7) .cc-img { background: linear-gradient(145deg, #fccb90, #d57eeb); }
+        .catalog-card:nth-child(8n+8) .cc-img { background: linear-gradient(145deg, #e0c3fc, #8ec5fc); }
+
+        .cc-tag {
+            position: absolute;
+            top: 10px; left: 10px;
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .tag-best { background: var(--gold); color: var(--midnight); }
+        .tag-new { background: var(--mint); color: #fff; }
+        .tag-sale { background: var(--coral); color: #fff; }
+
+        .cc-actions {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.3s var(--ease);
+        }
+
+        .catalog-card:hover .cc-actions {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .cc-action-btn {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255,255,255,0.95);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
+            font-size: 0.85rem;
+        }
+
+        .cc-action-btn:hover { background: var(--gold); color: #fff; }
+
+        .cc-body { padding: 1.2rem; }
+
+        .cc-cat {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold);
+        }
+
+        .cc-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin: 4px 0 2px;
+            color: var(--midnight);
+        }
+
+        .cc-author {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .cc-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cc-price {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--midnight);
+        }
+
+        .cc-price .old {
+            text-decoration: line-through;
+            color: var(--text-muted);
+            font-weight: 400;
+            font-size: 0.85rem;
+            margin-right: 4px;
+        }
+
+        .cc-stars {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            font-size: 0.78rem;
+            color: var(--gold);
+        }
+
+        .cc-stars span { color: var(--text-muted); margin-left: 2px; }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 3rem;
+        }
+
+        .page-btn {
+            width: 42px; height: 42px;
+            border: 2px solid var(--cream);
+            border-radius: var(--radius-sm);
+            background: #fff;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: inherit;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+        }
+
+        .page-btn:hover,
+        .page-btn.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--midnight);
+        }
+
+        /* ========== QUICK VIEW MODAL ========== */
+        .qv-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s var(--ease);
+        }
+
+        .qv-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .qv-modal {
+            background: #fff;
+            border-radius: var(--radius-lg);
+            display: flex;
+            max-width: 850px;
+            width: 92%;
+            overflow: hidden;
+            transform: scale(0.92) translateY(20px);
+            transition: transform 0.4s var(--ease);
+            max-height: 90vh;
+        }
+
+        .qv-overlay.active .qv-modal {
+            transform: scale(1) translateY(0);
+        }
+
+        .qv-left {
+            flex: 1;
+            background: linear-gradient(135deg, #f5f5f0, #ebe8e0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 450px;
+        }
+
+        .qv-book-cover {
+            width: 200px; height: 290px;
+            background: linear-gradient(145deg, #667eea, #764ba2);
+            border-radius: 6px;
+            box-shadow: 15px 15px 45px rgba(0,0,0,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.3);
+            font-size: 4rem;
+        }
+
+        .qv-right {
+            flex: 1;
+            padding: 2.5rem;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .qv-close {
+            position: absolute;
+            top: 1rem; right: 1rem;
+            width: 38px; height: 38px;
+            border: none;
+            background: var(--cream);
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .qv-close:hover { background: var(--gold); color: #fff; }
+
+        .qv-cat {
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold);
+        }
+
+        .qv-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 6px 0;
+        }
+
+        .qv-author { color: var(--text-muted); margin-bottom: 1rem; }
+
+        .qv-rating {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 1.5rem;
+        }
+
+        .qv-rating .stars { color: var(--gold); }
+        .qv-rating span { color: var(--text-muted); font-size: 0.9rem; }
+
+        .qv-desc {
+            color: var(--text-body);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .qv-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--midnight);
+            margin-bottom: 1.5rem;
+        }
+
+        .qv-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .qv-btn-primary {
+            flex: 1;
+            padding: 14px;
+            background: var(--midnight);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .qv-btn-primary:hover { background: var(--gold); color: var(--midnight); }
+
+        .qv-btn-ghost {
+            padding: 14px 24px;
+            background: transparent;
+            border: 2px solid var(--cream);
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .qv-btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .filter-sidebar { display: none; }
+            .catalog-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .topnav-links { display: none; }
+            .catalog-grid { grid-template-columns: repeat(2, 1fr); }
+            .toolbar { flex-direction: column; align-items: stretch; }
+            .qv-modal { flex-direction: column; }
+            .qv-left { min-height: 250px; }
+        }
+
+        @media (max-width: 480px) {
+            .catalog-grid { grid-template-columns: 1fr; max-width: 350px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Nav -->
+    <nav class="topnav">
+        <a href="index.html" class="topnav-logo"><i class="fas fa-book-open"></i> Booqe</a>
+        <ul class="topnav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#" class="active">Browse</a></li>
+            <li><a href="#">Authors</a></li>
+            <li><a href="#">Categories</a></li>
+        </ul>
+        <div class="topnav-right">
+            <button class="icon-btn"><i class="far fa-heart"></i></button>
+            <button class="icon-btn"><i class="fas fa-shopping-bag"></i><span class="dot"></span></button>
+            <button class="icon-btn"><i class="fas fa-user-circle"></i></button>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <!-- Filter Sidebar -->
+        <aside class="filter-sidebar">
+            <div class="filter-header">
+                <h3><i class="fas fa-sliders"></i> Filters</h3>
+                <button class="clear-all">Clear All</button>
+            </div>
+
+            <div class="filter-block">
+                <h4>Category</h4>
+                <ul class="filter-list">
+                    <li><input type="checkbox" checked><label>All</label></li>
+                    <li><input type="checkbox"><label>Fiction</label><span class="count">2,350</span></li>
+                    <li><input type="checkbox"><label>Non-Fiction</label><span class="count">1,890</span></li>
+                    <li><input type="checkbox"><label>Science</label><span class="count">950</span></li>
+                    <li><input type="checkbox"><label>Romance</label><span class="count">3,120</span></li>
+                    <li><input type="checkbox"><label>Mystery</label><span class="count">1,650</span></li>
+                    <li><input type="checkbox"><label>Biography</label><span class="count">720</span></li>
+                </ul>
+            </div>
+
+            <div class="filter-block">
+                <h4>Price Range</h4>
+                <div class="price-row">
+                    <input type="number" placeholder="Min" value="0">
+                    <input type="number" placeholder="Max" value="100">
+                </div>
+                <button class="apply-btn">Apply</button>
+            </div>
+
+            <div class="filter-block">
+                <h4>Rating</h4>
+                <ul class="filter-list">
+                    <li><input type="radio" name="rating"><label>★★★★★ & up</label></li>
+                    <li><input type="radio" name="rating" checked><label>★★★★☆ & up</label></li>
+                    <li><input type="radio" name="rating"><label>★★★☆☆ & up</label></li>
+                </ul>
+            </div>
+
+            <div class="filter-block">
+                <h4>Format</h4>
+                <ul class="filter-list">
+                    <li><input type="checkbox"><label>Hardcover</label></li>
+                    <li><input type="checkbox"><label>Paperback</label></li>
+                    <li><input type="checkbox"><label>E-Book</label></li>
+                    <li><input type="checkbox"><label>Audiobook</label></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-area">
+            <div class="toolbar">
+                <div class="search-wrap">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search books, authors, ISBN...">
+                </div>
+                <div class="toolbar-right">
+                    <span class="result-count">Showing <strong>1–12</strong> of <strong>2,456</strong></span>
+                    <select class="sort-select">
+                        <option>Most Popular</option>
+                        <option>Newest</option>
+                        <option>Price: Low → High</option>
+                        <option>Price: High → Low</option>
+                        <option>Top Rated</option>
+                    </select>
+                    <div class="view-btns">
+                        <button class="active"><i class="fas fa-th"></i></button>
+                        <button><i class="fas fa-list"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="catalog-grid" id="catalogGrid">
+                <!-- Card 1 -->
+                <div class="catalog-card" onclick="openQuickView()">
+                    <div class="cc-cover">
+                        <span class="cc-tag tag-best">Bestseller</span>
+                        <div class="cc-img"><i class="fas fa-book"></i></div>
+                        <div class="cc-actions">
+                            <button class="cc-action-btn"><i class="far fa-heart"></i></button>
+                            <button class="cc-action-btn"><i class="fas fa-eye"></i></button>
+                            <button class="cc-action-btn"><i class="fas fa-cart-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="cc-body">
+                        <span class="cc-cat">Fiction</span>
+                        <h3 class="cc-title">The Silent Echo</h3>
+                        <p class="cc-author">by Sarah Mitchell</p>
+                        <div class="cc-bottom">
+                            <span class="cc-price">$24.99</span>
+                            <div class="cc-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><span>4.8</span></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="catalog-card">
+                    <div class="cc-cover">
+                        <span class="cc-tag tag-new">New</span>
+                        <div class="cc-img"><i class="fas fa-book"></i></div>
+                        <div class="cc-actions">
+                            <button class="cc-action-btn"><i class="far fa-heart"></i></button>
+                            <button class="cc-action-btn"><i class="fas fa-eye"></i></button>
+                            <button class="cc-action-btn"><i class="fas fa-cart-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="cc-body">
+                        <span class="cc-cat">Romance</span>
+                        <h3 class="cc-title">Midnight Garden</h3>
+                        <p class="cc-author">by Emily Rose</p>
+                        <div class="cc-bottom">
+                            <span class="cc-price">$19.99</span>
+                            <div class="cc-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span>4.9</span></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="catalog-card">
+                    <div class="cc-cover">
+                        <span class="cc-tag tag-sale">-30%</span>
+                        <div class="cc-img"><i class="fas fa-book"></i></div>
+                        <div class="cc-actions">
+                            <button class="cc-action-btn"><i class="far fa-heart"></i></button>
+                            <button class="cc-action-btn"><i class="fas fa-eye"></i></button>
+                            <button class="cc-action-btn"><i class="fas fa-cart-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="cc-body">
+                        <span class="cc-cat">Science</span>
+                        <h3 class="cc-title">Quantum Dreams</h3>
+                        <p class="cc-author">by Dr. James Walker</p>
+                        <div class="cc-bottom">
+                            <span class="cc-price"><span class="old">$49.99</span>$34.99</span>
+                            <div class="cc-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><span>4.7</span></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="catalog-card">
+                    <div class="cc-cover">
+                        <div class="cc-img"><i class="fas fa-book"></i></div>
+                        <div class="cc-actions">
+                            <button class="cc-action-btn"><i class="far fa-heart"></i></button>
+                            <button class="cc-action-btn"><i class="fas fa-eye"></i></button>
+                            <button class="cc-action-btn"><i class="fas fa-cart-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="cc-body">
+                        <span class="cc-cat">Mystery</span>
+                        <h3 class="cc-title">The Last Witness</h3>
+                        <p class="cc-author">by Michael Stone</p>
+                        <div class="cc-bottom">
+                            <span class="cc-price">$22.99</span>
+                            <div class="cc-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><span>4.6</span></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 5 -->
+                <div class="catalog-card">
+                    <div class="cc-cover">
+                        <span class="cc-tag tag-best">Popular</span>
+                        <div class="cc-img"><i class="fas fa-book"></i></div>
+                        <div class="cc-actions">
+                            <button class="cc-action-btn"><i class="far fa-heart"></i></button>
+                            <button class="cc-action-btn"><i class="fas fa-eye"></i></button>
+                            <button class="cc-action-btn"><i class="fas fa-cart-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="cc-body">
+                        <span class="cc-cat">Self-Help</span>
+                        <h3 class="cc-title">Mindful Living</h3>
+                        <p class="cc-author">by Anna Williams</p>
+                        <div class="cc-bottom">
+                            <span class="cc-price">$18.99</span>
+                            <div class="cc-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span>4.9</span></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 6 -->
+                <div class="catalog-card">
+                    <div class="cc-cover">
+                        <div class="cc-img"><i class="fas fa-book"></i></div>
+                        <div class="cc-actions">
+                            <button class="cc-action-btn"><i class="far fa-heart"></i></button>
+                            <button class="cc-action-btn"><i class="fas fa-eye"></i></button>
+                            <button class="cc-action-btn"><i class="fas fa-cart-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="cc-body">
+                        <span class="cc-cat">Fantasy</span>
+                        <h3 class="cc-title">Kingdom of Shadows</h3>
+                        <p class="cc-author">by Robert King</p>
+                        <div class="cc-bottom">
+                            <span class="cc-price">$27.99</span>
+                            <div class="cc-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><span>4.5</span></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 7 -->
+                <div class="catalog-card">
+                    <div class="cc-cover">
+                        <span class="cc-tag tag-new">New</span>
+                        <div class="cc-img"><i class="fas fa-book"></i></div>
+                        <div class="cc-actions">
+                            <button class="cc-action-btn"><i class="far fa-heart"></i></button>
+                            <button class="cc-action-btn"><i class="fas fa-eye"></i></button>
+                            <button class="cc-action-btn"><i class="fas fa-cart-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="cc-body">
+                        <span class="cc-cat">Biography</span>
+                        <h3 class="cc-title">Life Lessons</h3>
+                        <p class="cc-author">by David Chen</p>
+                        <div class="cc-bottom">
+                            <span class="cc-price">$29.99</span>
+                            <div class="cc-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><span>4.8</span></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 8 -->
+                <div class="catalog-card">
+                    <div class="cc-cover">
+                        <span class="cc-tag tag-sale">-25%</span>
+                        <div class="cc-img"><i class="fas fa-book"></i></div>
+                        <div class="cc-actions">
+                            <button class="cc-action-btn"><i class="far fa-heart"></i></button>
+                            <button class="cc-action-btn"><i class="fas fa-eye"></i></button>
+                            <button class="cc-action-btn"><i class="fas fa-cart-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="cc-body">
+                        <span class="cc-cat">Thriller</span>
+                        <h3 class="cc-title">Dark Waters</h3>
+                        <p class="cc-author">by Lisa Thompson</p>
+                        <div class="cc-bottom">
+                            <span class="cc-price"><span class="old">$28.99</span>$21.99</span>
+                            <div class="cc-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><span>4.4</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pagination">
+                <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">4</button>
+                <button class="page-btn">5</button>
+                <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Quick View Modal -->
+    <div class="qv-overlay" id="quickView">
+        <div class="qv-modal">
+            <div class="qv-left">
+                <div class="qv-book-cover"><i class="fas fa-book"></i></div>
+            </div>
+            <div class="qv-right">
+                <button class="qv-close" onclick="closeQuickView()"><i class="fas fa-times"></i></button>
+                <span class="qv-cat">Fiction</span>
+                <h2 class="qv-title">The Silent Echo</h2>
+                <p class="qv-author">by Sarah Mitchell</p>
+                <div class="qv-rating">
+                    <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+                    <span>4.8 (2,456 reviews)</span>
+                </div>
+                <p class="qv-desc">A captivating tale of mystery and self-discovery. When Elena discovers a hidden journal in her grandmother's attic, she embarks on a journey that will change everything she believed about her family's past...</p>
+                <div class="qv-price">$24.99</div>
+                <div class="qv-btns">
+                    <button class="qv-btn-primary"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                    <button class="qv-btn-ghost"><i class="far fa-heart"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openQuickView() {
+            document.getElementById('quickView').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeQuickView() {
+            document.getElementById('quickView').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('quickView').addEventListener('click', function(e) {
+            if (e.target === this) closeQuickView();
+        });
+
+        // View toggle
+        document.querySelectorAll('.view-btns button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.view-btns button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Pagination
+        document.querySelectorAll('.page-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (!this.querySelector('i')) {
+                    document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Wishlist toggles
+        document.querySelectorAll('.cc-action-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const icon = this.querySelector('i');
+                if (icon && icon.classList.contains('fa-heart')) {
+                    icon.classList.toggle('far');
+                    icon.classList.toggle('fas');
+                    this.style.background = icon.classList.contains('fas') ? '#ff6b6b' : '';
+                    this.style.color = icon.classList.contains('fas') ? '#fff' : '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

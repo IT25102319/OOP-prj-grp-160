@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Booqe Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --midnight: #0f0f1a;
+            --surface: #161625;
+            --surface-2: #1e1e32;
+            --surface-3: #262640;
+            --gold: #e8c547;
+            --gold-dim: rgba(232, 197, 71, 0.12);
+            --coral: #ff6b6b;
+            --mint: #4ecdc4;
+            --lavender: #a78bfa;
+            --blue: #60a5fa;
+            --warm-white: #f8f7f4;
+            --cream: #f0ede6;
+            --text-light: rgba(255,255,255,0.9);
+            --text-dim: rgba(255,255,255,0.5);
+            --text-muted: rgba(255,255,255,0.3);
+            --glass: rgba(255,255,255,0.04);
+            --glass-border: rgba(255,255,255,0.06);
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-full: 100px;
+            --ease: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--midnight);
+            color: var(--text-light);
+            display: flex;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--surface); }
+        ::-webkit-scrollbar-thumb { background: var(--surface-3); border-radius: 3px; }
+
+        /* ========== SIDEBAR ========== */
+        .sidebar {
+            width: 260px;
+            background: var(--surface);
+            border-right: 1px solid var(--glass-border);
+            padding: 1.5rem;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 0.8rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sidebar-logo i { color: var(--gold); font-size: 1.2rem; }
+
+        .sidebar-nav { list-style: none; flex: 1; }
+
+        .nav-group-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            padding: 0 0.8rem;
+            margin: 1.8rem 0 0.8rem;
+            font-weight: 600;
+        }
+
+        .sidebar-nav li a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: var(--radius-sm);
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s var(--ease);
+            margin-bottom: 2px;
+        }
+
+        .sidebar-nav li a:hover {
+            background: var(--glass);
+            color: var(--text-light);
+        }
+
+        .sidebar-nav li a.active {
+            background: var(--gold);
+            color: var(--midnight);
+        }
+
+        .sidebar-nav li a i { width: 20px; text-align: center; font-size: 0.95rem; }
+
+        .nav-badge {
+            margin-left: auto;
+            background: var(--coral);
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .sidebar-nav li a.active .nav-badge {
+            background: var(--midnight);
+            color: var(--gold);
+        }
+
+        .sidebar-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 1rem;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 1rem;
+        }
+
+        .sidebar-avatar {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, var(--gold), #d4b13f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--midnight);
+            font-size: 0.85rem;
+        }
+
+        .sidebar-user-info { flex: 1; }
+        .sidebar-user-info h4 { font-size: 0.9rem; font-weight: 600; }
+        .sidebar-user-info span { font-size: 0.75rem; color: var(--text-muted); }
+
+        /* ========== MAIN ========== */
+        .dashboard {
+            flex: 1;
+            margin-left: 260px;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .dash-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .dash-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .dash-header p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-top: 2px;
+        }
+
+        .dash-header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .dash-search {
+            position: relative;
+        }
+
+        .dash-search input {
+            padding: 10px 16px 10px 40px;
+            background: var(--surface);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-full);
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.9rem;
+            width: 260px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .dash-search input::placeholder { color: var(--text-muted); }
+        .dash-search input:focus { border-color: var(--gold); }
+
+        .dash-search i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .dash-icon-btn {
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            border: 1px solid var(--glass-border);
+            background: var(--surface);
+            color: var(--text-dim);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .dash-icon-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+        .dash-icon-btn .ping {
+            position: absolute;
+            top: 8px; right: 8px;
+            width: 8px; height: 8px;
+            background: var(--coral);
+            border-radius: 50%;
+            animation: ping 2s ease-in-out infinite;
+        }
+
+        @keyframes ping {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* ========== STAT CARDS ========== */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            transition: all 0.4s var(--ease);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            border-radius: 3px 3px 0 0;
+        }
+
+        .stat-card:nth-child(1)::before { background: var(--blue); }
+        .stat-card:nth-child(2)::before { background: var(--mint); }
+        .stat-card:nth-child(3)::before { background: var(--gold); }
+        .stat-card:nth-child(4)::before { background: var(--lavender); }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .stat-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .stat-icon {
+            width: 48px; height: 48px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .stat-icon.blue { background: rgba(96, 165, 250, 0.12); color: var(--blue); }
+        .stat-icon.mint { background: rgba(78, 205, 196, 0.12); color: var(--mint); }
+        .stat-icon.gold { background: rgba(232, 197, 71, 0.12); color: var(--gold); }
+        .stat-icon.purple { background: rgba(167, 139, 250, 0.12); color: var(--lavender); }
+
+        .stat-change {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: var(--radius-full);
+        }
+
+        .stat-change.up { background: rgba(78, 205, 196, 0.1); color: var(--mint); }
+        .stat-change.down { background: rgba(255, 107, 107, 0.1); color: var(--coral); }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* ========== CONTENT GRID ========== */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 5fr 3fr;
+            gap: 1.5rem;
+        }
+
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .panel-title {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .panel-action {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: inherit;
+        }
+
+        .panel-action:hover { text-decoration: underline; }
+
+        /* Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th {
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            font-weight: 600;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .data-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--glass-border);
+            font-size: 0.9rem;
+        }
+
+        .data-table tr:last-child td { border-bottom: none; }
+
+        .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+        .book-cell {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .book-mini-cover {
+            width: 42px; height: 58px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.85rem;
+        }
+
+        .book-mini-cover:nth-child(1) { background: linear-gradient(145deg, #667eea, #764ba2); }
+
+        .book-cell-info h4 { font-size: 0.92rem; font-weight: 600; }
+        .book-cell-info span { font-size: 0.8rem; color: var(--text-muted); }
+
+        .status-pill {
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .status-pill.in { background: rgba(78, 205, 196, 0.12); color: var(--mint); }
+        .status-pill.low { background: rgba(232, 197, 71, 0.12); color: var(--gold); }
+        .status-pill.out { background: rgba(255, 107, 107, 0.12); color: var(--coral); }
+
+        .row-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .row-action-btn {
+            width: 32px; height: 32px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--glass-border);
+            background: transparent;
+            color: var(--text-dim);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-size: 0.8rem;
+        }
+
+        .row-action-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+        /* Right Panels */
+        .right-col { display: flex; flex-direction: column; gap: 1.5rem; }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .order-item:last-child { border-bottom: none; }
+
+        .order-avatar {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: var(--midnight);
+        }
+
+        .order-item:nth-child(1) .order-avatar { background: linear-gradient(145deg, var(--blue), #3b82f6); }
+        .order-item:nth-child(2) .order-avatar { background: linear-gradient(145deg, var(--mint), #2dd4bf); }
+        .order-item:nth-child(3) .order-avatar { background: linear-gradient(145deg, var(--lavender), #8b5cf6); }
+        .order-item:nth-child(4) .order-avatar { background: linear-gradient(145deg, var(--coral), #ef4444); }
+
+        .order-info { flex: 1; }
+        .order-info h4 { font-size: 0.9rem; font-weight: 600; }
+        .order-info span { font-size: 0.8rem; color: var(--text-muted); }
+
+        .order-amount { font-weight: 700; color: var(--gold); }
+
+        /* Activity */
+        .activity-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .activity-item:last-child { border-bottom: none; }
+
+        .activity-dot {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.8rem;
+        }
+
+        .activity-dot.sale { background: rgba(78, 205, 196, 0.12); color: var(--mint); }
+        .activity-dot.book { background: rgba(96, 165, 250, 0.12); color: var(--blue); }
+        .activity-dot.star { background: rgba(232, 197, 71, 0.12); color: var(--gold); }
+
+        .activity-text p { font-size: 0.88rem; line-height: 1.4; }
+        .activity-text p strong { font-weight: 600; }
+        .activity-text span { font-size: 0.78rem; color: var(--text-muted); }
+
+        /* ========== ADD BOOK MODAL ========== */
+        .modal-bg {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s var(--ease);
+        }
+
+        .modal-bg.active { opacity: 1; visibility: visible; }
+
+        .modal-box {
+            background: var(--surface);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            width: 92%;
+            max-width: 550px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.95) translateY(20px);
+            transition: transform 0.4s var(--ease);
+        }
+
+        .modal-bg.active .modal-box { transform: scale(1) translateY(0); }
+
+        .modal-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-top h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+        }
+
+        .modal-x {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--glass-border);
+            background: transparent;
+            color: var(--text-dim);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-x:hover { border-color: var(--gold); color: var(--gold); }
+
+        .field { margin-bottom: 1.3rem; }
+
+        .field label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: var(--text-dim);
+        }
+
+        .field input,
+        .field select,
+        .field textarea {
+            width: 100%;
+            padding: 11px 14px;
+            background: var(--surface-2);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-sm);
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            border-color: var(--gold);
+        }
+
+        .field textarea { resize: vertical; min-height: 80px; }
+
+        .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+        .upload-area {
+            border: 2px dashed var(--glass-border);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .upload-area:hover { border-color: var(--gold); }
+        .upload-area i { font-size: 2rem; color: var(--gold); margin-bottom: 8px; }
+        .upload-area p { color: var(--text-muted); font-size: 0.85rem; }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--gold);
+            color: var(--midnight);
+            border: none;
+            border-radius: var(--radius-full);
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            background: #fff;
+            transform: scale(1.02);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
+            .content-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .dashboard { margin-left: 0; }
+            .stats-row { grid-template-columns: 1fr; }
+            .dash-search { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <a href="index.html" class="sidebar-logo"><i class="fas fa-book-open"></i> Booqe</a>
+
+        <ul class="sidebar-nav">
+            <li><a href="#" class="active"><i class="fas fa-th-large"></i> Dashboard</a></li>
+            <li><a href="#"><i class="fas fa-book"></i> Books <span class="nav-badge">2.4k</span></a></li>
+            <li><a href="#"><i class="fas fa-shopping-cart"></i> Orders <span class="nav-badge">18</span></a></li>
+            <li><a href="#"><i class="fas fa-users"></i> Customers</a></li>
+            <li><a href="#"><i class="fas fa-tags"></i> Categories</a></li>
+
+            <li class="nav-group-label">Analytics</li>
+            <li><a href="#"><i class="fas fa-chart-line"></i> Sales Report</a></li>
+            <li><a href="#"><i class="fas fa-chart-pie"></i> Statistics</a></li>
+
+            <li class="nav-group-label">System</li>
+            <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="#"><i class="fas fa-question-circle"></i> Help</a></li>
+            <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+
+        <div class="sidebar-user">
+            <div class="sidebar-avatar">JD</div>
+            <div class="sidebar-user-info">
+                <h4>John Doe</h4>
+                <span>Administrator</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Dashboard Content -->
+    <main class="dashboard">
+        <div class="dash-header">
+            <div>
+                <h1>Dashboard</h1>
+                <p>Welcome back! Here's what's happening today.</p>
+            </div>
+            <div class="dash-header-right">
+                <div class="dash-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <button class="dash-icon-btn"><i class="fas fa-bell"></i><span class="ping"></span></button>
+                <button class="dash-icon-btn"><i class="fas fa-envelope"></i></button>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-top">
+                    <div class="stat-icon blue"><i class="fas fa-book"></i></div>
+                    <div class="stat-change up"><i class="fas fa-arrow-up"></i> 12%</div>
+                </div>
+                <div class="stat-value">2,456</div>
+                <div class="stat-label">Total Books</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-top">
+                    <div class="stat-icon mint"><i class="fas fa-shopping-bag"></i></div>
+                    <div class="stat-change up"><i class="fas fa-arrow-up"></i> 8%</div>
+                </div>
+                <div class="stat-value">1,289</div>
+                <div class="stat-label">Total Orders</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-top">
+                    <div class="stat-icon gold"><i class="fas fa-dollar-sign"></i></div>
+                    <div class="stat-change up"><i class="fas fa-arrow-up"></i> 23%</div>
+                </div>
+                <div class="stat-value">$48,290</div>
+                <div class="stat-label">Revenue</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-top">
+                    <div class="stat-icon purple"><i class="fas fa-users"></i></div>
+                    <div class="stat-change down"><i class="fas fa-arrow-down"></i> 3%</div>
+                </div>
+                <div class="stat-value">892</div>
+                <div class="stat-label">New Customers</div>
+            </div>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="content-grid">
+            <!-- Books Table -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h3 class="panel-title">Recent Books</h3>
+                    <button class="panel-action" onclick="openAddBook()">+ Add New Book</button>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Book</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="book-cell">
+                                    <div class="book-mini-cover" style="background:linear-gradient(145deg,#667eea,#764ba2);"><i class="fas fa-book"></i></div>
+                                    <div class="book-cell-info"><h4>The Silent Echo</h4><span>Sarah Mitchell</span></div>
+                                </div>
+                            </td>
+                            <td>Fiction</td>
+                            <td>$24.99</td>
+                            <td>45</td>
+                            <td><span class="status-pill in">In Stock</span></td>
+                            <td>
+                                <div class="row-actions">
+                                    <button class="row-action-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="row-action-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="book-cell">
+                                    <div class="book-mini-cover" style="background:linear-gradient(145deg,#f093fb,#f5576c);"><i class="fas fa-book"></i></div>
+                                    <div class="book-cell-info"><h4>Midnight Garden</h4><span>Emily Rose</span></div>
+                                </div>
+                            </td>
+                            <td>Romance</td>
+                            <td>$19.99</td>
+                            <td>8</td>
+                            <td><span class="status-pill low">Low Stock</span></td>
+                            <td>
+                                <div class="row-actions">
+                                    <button class="row-action-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="row-action-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="book-cell">
+                                    <div class="book-mini-cover" style="background:linear-gradient(145deg,#4facfe,#00f2fe);"><i class="fas fa-book"></i></div>
+                                    <div class="book-cell-info"><h4>Quantum Dreams</h4><span>Dr. James Walker</span></div>
+                                </div>
+                            </td>
+                            <td>Science</td>
+                            <td>$34.99</td>
+                            <td>0</td>
+                            <td><span class="status-pill out">Out of Stock</span></td>
+                            <td>
+                                <div class="row-actions">
+                                    <button class="row-action-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="row-action-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="book-cell">
+                                    <div class="book-mini-cover" style="background:linear-gradient(145deg,#43e97b,#38f9d7);"><i class="fas fa-book"></i></div>
+                                    <div class="book-cell-info"><h4>The Last Witness</h4><span>Michael Stone</span></div>
+                                </div>
+                            </td>
+                            <td>Mystery</td>
+                            <td>$22.99</td>
+                            <td>32</td>
+                            <td><span class="status-pill in">In Stock</span></td>
+                            <td>
+                                <div class="row-actions">
+                                    <button class="row-action-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="row-action-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-col">
+                <!-- Recent Orders -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3 class="panel-title">Recent Orders</h3>
+                        <button class="panel-action">View All</button>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-avatar">AM</div>
+                        <div class="order-info"><h4>Alex Morgan</h4><span>2 books · 5 min ago</span></div>
+                        <div class="order-amount">$48.99</div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-avatar">SC</div>
+                        <div class="order-info"><h4>Sarah Chen</h4><span>1 book · 15 min ago</span></div>
+                        <div class="order-amount">$24.99</div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-avatar">JW</div>
+                        <div class="order-info"><h4>James Wilson</h4><span>3 books · 1 hr ago</span></div>
+                        <div class="order-amount">$72.50</div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-avatar">LT</div>
+                        <div class="order-info"><h4>Lisa Thompson</h4><span>1 book · 2 hrs ago</span></div>
+                        <div class="order-amount">$19.99</div>
+                    </div>
+                </div>
+
+                <!-- Activity -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3 class="panel-title">Activity</h3>
+                        <button class="panel-action">View All</button>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-dot sale"><i class="fas fa-cart-plus"></i></div>
+                        <div class="activity-text">
+                            <p><strong>New order</strong> placed by Alex Morgan</p>
+                            <span>5 minutes ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-dot book"><i class="fas fa-book"></i></div>
+                        <div class="activity-text">
+                            <p>Book <strong>"Dark Waters"</strong> was added</p>
+                            <span>30 minutes ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-dot star"><i class="fas fa-star"></i></div>
+                        <div class="activity-text">
+                            <p>5-star review on <strong>"The Silent Echo"</strong></p>
+                            <span>1 hour ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Book Modal -->
+    <div class="modal-bg" id="addBookModal">
+        <div class="modal-box">
+            <div class="modal-top">
+                <h2>Add New Book</h2>
+                <button class="modal-x" onclick="closeAddBook()"><i class="fas fa-times"></i></button>
+            </div>
+            <form onsubmit="return false;">
+                <div class="field">
+                    <label>Book Title</label>
+                    <input type="text" placeholder="Enter book title">
+                </div>
+                <div class="field-row">
+                    <div class="field">
+                        <label>Author</label>
+                        <input type="text" placeholder="Author name">
+                    </div>
+                    <div class="field">
+                        <label>ISBN</label>
+                        <input type="text" placeholder="ISBN number">
+                    </div>
+                </div>
+                <div class="field-row">
+                    <div class="field">
+                        <label>Category</label>
+                        <select>
+                            <option>Select Category</option>
+                            <option>Fiction</option>
+                            <option>Non-Fiction</option>
+                            <option>Science</option>
+                            <option>Romance</option>
+                            <option>Mystery</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Price ($)</label>
+                        <input type="number" placeholder="0.00">
+                    </div>
+                </div>
+                <div class="field-row">
+                    <div class="field">
+                        <label>Stock</label>
+                        <input type="number" placeholder="0">
+                    </div>
+                    <div class="field">
+                        <label>Year</label>
+                        <input type="number" placeholder="2024">
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Description</label>
+                    <textarea placeholder="Book description..."></textarea>
+                </div>
+                <div class="field">
+                    <label>Cover Image</label>
+                    <div class="upload-area">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Click to upload or drag & drop</p>
+                    </div>
+                </div>
+                <button class="submit-btn" type="submit">
+                    <i class="fas fa-plus"></i> Add Book
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openAddBook() {
+            document.getElementById('addBookModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAddBook() {
+            document.getElementById('addBookModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('addBookModal').addEventListener('click', function(e) {
+            if (e.target === this) closeAddBook();
+        });
+
+        // Sidebar active state
+        document.querySelectorAll('.sidebar-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === '#') {
+                    e.preventDefault();
+                    document.querySelectorAll('.sidebar-nav a').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Animate stat values on load
+        document.querySelectorAll('.stat-value').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(10px)';
+            setTimeout(() => {
+                el.style.transition = 'all 0.6s ease';
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }, 500);
+        });
+    </script>
+</body>
+</html>
