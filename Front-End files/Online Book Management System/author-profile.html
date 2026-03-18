@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBMS - Author Profile</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/shop.css">
+    <style>
+        .author-hero {
+            background-color: #f8f9fa;
+            position: relative;
+            padding: 5rem 0;
+            overflow: hidden;
+        }
+        .author-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 50%;
+            background: linear-gradient(135deg, rgba(30,60,114,0.1) 0%, rgba(42,82,152,0.1) 100%);
+            z-index: 0;
+            border-bottom-left-radius: 50% 20%;
+            border-bottom-right-radius: 50% 20%;
+        }
+        .author-avatar {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 5px solid #fff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm py-3 sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="shop.html">
+                <i class='bx bx-book-reader text-primary fs-3'></i>
+                <span class="brand-text">BookHaven</span>
+            </a>
+            <div class="ms-auto d-flex align-items-center gap-3">
+                <a href="shop.html" class="text-decoration-none text-muted fw-semibold hover-primary"><i class='bx bx-store ms-1'></i> Browse Shop</a>
+                <a href="cart.html" class="action-btn position-relative" title="Cart">
+                    <i class='bx bx-shopping-bag text-dark'></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">3</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Author Profile Hero -->
+    <section class="author-hero text-center position-relative">
+        <div class="container position-relative z-1">
+            <img src="https://images.unsplash.com/photo-1555529813-f661d9a2a912?q=80&w=400&auto=format&fit=crop" class="author-avatar mb-4" alt="Author Picture">
+            <h1 class="display-5 fw-bold font-playfair mb-2">James Clear</h1>
+            <p class="text-muted fs-5 mb-4 d-flex justify-content-center align-items-center gap-2">
+                <i class='bx bxs-check-shield text-success'></i> Best-Selling Author & Speaker
+            </p>
+            <div class="d-flex justify-content-center gap-4 mb-4">
+                <div class="text-center">
+                    <h4 class="fw-bold mb-0 text-dark">5</h4>
+                    <p class="text-muted fs-14 mb-0">Published Books</p>
+                </div>
+                <div class="border-end"></div>
+                <div class="text-center">
+                    <h4 class="fw-bold mb-0 text-dark">4.9</h4>
+                    <p class="text-muted fs-14 mb-0">Average Rating</p>
+                </div>
+                <div class="border-end"></div>
+                <div class="text-center">
+                    <h4 class="fw-bold mb-0 text-dark">1M+</h4>
+                    <p class="text-muted fs-14 mb-0">Copies Sold</p>
+                </div>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <p class="lead text-muted excerpt">
+                        James Clear is an American author, entrepreneur, and photographer. He is the author of the #1 New York Times bestseller Atomic Habits, which has sold over 15 million copies worldwide. His work focuses on habits, decision making, and continuous improvement.
+                    </p>
+                    <div class="d-flex justify-content-center gap-3 mt-4">
+                        <a href="#" class="btn btn-primary rounded-pill px-4 shadow-sm"><i class='bx bx-plus me-1'></i> Follow Author</a>
+                        <a href="#" class="btn btn-outline-dark rounded-circle" style="width: 40px; height: 40px; padding: 0; line-height: 40px;"><i class='bx bxl-twitter fs-5'></i></a>
+                        <a href="#" class="btn btn-outline-dark rounded-circle" style="width: 40px; height: 40px; padding: 0; line-height: 40px;"><i class='bx bxl-instagram fs-5'></i></a>
+                        <a href="#" class="btn btn-outline-dark rounded-circle" style="width: 40px; height: 40px; padding: 0; line-height: 40px;"><i class='bx bx-globe fs-5'></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Author Books Section -->
+    <section class="py-5 bg-white">
+        <div class="container py-4">
+            <div class="d-flex justify-content-between align-items-end mb-5 border-bottom pb-3">
+                <h3 class="fw-bold mb-0 font-playfair d-flex align-items-center gap-2"><i class='bx bx-book-bookmark text-primary'></i> Books by James Clear</h3>
+                <div class="dropdown">
+                    <button class="btn btn-outline-secondary dropdown-toggle rounded-pill px-4" type="button" data-bs-toggle="dropdown">
+                        Sort by: Bestselling
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end border-0 shadow">
+                        <li><a class="dropdown-item active" href="#">Bestselling</a></li>
+                        <li><a class="dropdown-item" href="#">Newest Releases</a></li>
+                        <li><a class="dropdown-item" href="#">Highest Rated</a></li>
+                        <li><a class="dropdown-item" href="#">Price: Low to High</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Book Card 1 -->
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="product-card border-0 bg-white rounded-4 overflow-hidden shadow-sm h-100 position-relative">
+                        <button class="btn wishlist-btn position-absolute top-0 end-0 m-3 z-2 bg-white rounded-circle shadow-sm"><i class='bx bx-heart text-muted'></i></button>
+                        <div class="product-img-wrapper position-relative overflow-hidden bg-light p-4 text-center">
+                            <a href="book-details.html">
+                                <img src="https://images.unsplash.com/photo-1629196914902-1845bb0b8529?q=80&w=400&auto=format&fit=crop" class="img-fluid rounded book-cover shadow" alt="Book Cover">
+                            </a>
+                            <div class="product-action-overlay d-flex justify-content-center align-items-center gap-2">
+                                <a href="cart.html" class="btn btn-primary rounded-pill px-4 fw-semibold shadow"><i class='bx bx-cart-add me-2'></i> Add to Cart</a>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-secondary-subtle text-secondary px-2 rounded-pill fs-12">Self Help</span>
+                                <div class="text-warning fs-14">
+                                    <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star-half'></i>
+                                </div>
+                            </div>
+                            <h5 class="fw-bold mb-1"><a href="book-details.html" class="text-dark text-decoration-none">The Atomic Habits</a></h5>
+                            <p class="text-muted fs-14 mb-3" style="min-height: 40px;">An Easy & Proven Way to Build Good Habits & Break Bad Ones</p>
+                            <div class="d-flex justify-content-between align-items-center mt-auto">
+                                <div class="price">
+                                    <span class="fs-5 fw-bold text-primary">Rs. 2,100</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Book Card 2 -->
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="product-card border-0 bg-white rounded-4 overflow-hidden shadow-sm h-100 position-relative">
+                        <button class="btn wishlist-btn position-absolute top-0 end-0 m-3 z-2 bg-white rounded-circle shadow-sm"><i class='bx bx-heart text-muted'></i></button>
+                        <div class="product-img-wrapper position-relative overflow-hidden bg-light p-4 text-center">
+                            <a href="book-details.html">
+                                <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=400&auto=format&fit=crop" class="img-fluid rounded book-cover shadow" alt="Book Cover">
+                            </a>
+                            <div class="product-action-overlay d-flex justify-content-center align-items-center gap-2">
+                                <a href="cart.html" class="btn btn-primary rounded-pill px-4 fw-semibold shadow"><i class='bx bx-cart-add me-2'></i> Add to Cart</a>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-secondary-subtle text-secondary px-2 rounded-pill fs-12">Productivity</span>
+                                <div class="text-warning fs-14">
+                                    <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bx-star'></i>
+                                </div>
+                            </div>
+                            <h5 class="fw-bold mb-1"><a href="book-details.html" class="text-dark text-decoration-none">Clear Thinking</a></h5>
+                            <p class="text-muted fs-14 mb-3" style="min-height: 40px;">Turning Ordinary Moments into Extraordinary Results</p>
+                            <div class="d-flex justify-content-between align-items-center mt-auto">
+                                <div class="price">
+                                    <span class="fs-5 fw-bold text-primary">Rs. 1,800</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Genre & Similar Authors -->
+    <section class="py-5 bg-light">
+        <div class="container py-4">
+            <h4 class="fw-bold mb-4 font-playfair">Similar Authors in Productivity</h4>
+            <div class="d-flex gap-3 flex-wrap">
+                <a href="#" class="card border-0 shadow-sm rounded-pill py-2 px-4 text-decoration-none text-dark hover-primary d-flex flex-row align-items-center gap-3">
+                    <img src="https://ui-avatars.com/api/?name=Mark+Manson&background=random" class="rounded-circle" style="width: 30px; height: 30px;" alt="">
+                    <span class="fw-semibold">Mark Manson</span>
+                </a>
+                <a href="#" class="card border-0 shadow-sm rounded-pill py-2 px-4 text-decoration-none text-dark hover-primary d-flex flex-row align-items-center gap-3">
+                    <img src="https://ui-avatars.com/api/?name=Simon+Sinek&background=random" class="rounded-circle" style="width: 30px; height: 30px;" alt="">
+                    <span class="fw-semibold">Simon Sinek</span>
+                </a>
+                <a href="#" class="card border-0 shadow-sm rounded-pill py-2 px-4 text-decoration-none text-dark hover-primary d-flex flex-row align-items-center gap-3">
+                    <img src="https://ui-avatars.com/api/?name=Cal+Newport&background=random" class="rounded-circle" style="width: 30px; height: 30px;" alt="">
+                    <span class="fw-semibold">Cal Newport</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-5 pb-4">
+        <div class="container text-center text-white-50">
+            <p>&copy; 2026 BookHaven | OBMS. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

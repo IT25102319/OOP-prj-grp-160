@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBMS - Checkout</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/shop.css">
+</head>
+<body class="bg-light">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm py-3 sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="shop.html">
+                <i class='bx bx-book-reader text-primary fs-3'></i>
+                <span class="brand-text">BookHaven</span>
+            </a>
+            <div class="ms-auto d-flex align-items-center gap-3">
+                <a href="shop.html" class="text-decoration-none text-muted fw-semibold hover-primary"><i class='bx bx-arrow-back ms-1'></i> Continue Shopping</a>
+                <a href="user-dashboard.html" class="action-btn position-relative bg-light rounded-circle p-2" title="My Account">
+                    <i class='bx bx-user fs-5 text-dark'></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Checkout Content -->
+    <div class="container py-5">
+        <div class="row mb-4">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="shop.html" class="text-decoration-none text-muted">Shop</a></li>
+                        <li class="breadcrumb-item"><a href="cart.html" class="text-decoration-none text-muted">Cart</a></li>
+                        <li class="breadcrumb-item active fw-bold text-dark" aria-current="page">Checkout</li>
+                    </ol>
+                </nav>
+                <h2 class="fw-bold mt-2 display-6 font-playfair">Secure Checkout</h2>
+            </div>
+        </div>
+
+        <div class="row g-5">
+            <!-- Left Column: Forms -->
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm rounded-4 mb-4">
+                    <div class="card-body p-4 p-lg-5">
+                        <div class="d-flex align-items-center gap-2 mb-4">
+                            <i class='bx bx-map text-primary fs-3'></i>
+                            <h4 class="fw-bold mb-0">Shipping Information</h4>
+                        </div>
+                        
+                        <form action="user-dashboard.html">
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <label class="form-label text-muted fs-14 fw-semibold">First Name</label>
+                                    <input type="text" class="form-control px-3 py-2 bg-light border-0" value="Customer" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-muted fs-14 fw-semibold">Last Name</label>
+                                    <input type="text" class="form-control px-3 py-2 bg-light border-0" value="User" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-muted fs-14 fw-semibold">Email Address</label>
+                                    <input type="email" class="form-control px-3 py-2 bg-light border-0" value="customer@example.com" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-muted fs-14 fw-semibold">Phone Number</label>
+                                    <input type="tel" class="form-control px-3 py-2 bg-light border-0" value="0771234567" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label text-muted fs-14 fw-semibold">Address Line 1</label>
+                                    <input type="text" class="form-control px-3 py-2 bg-light border-0" value="No 123, Main Street" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label text-muted fs-14 fw-semibold">Address Line 2 (Optional)</label>
+                                    <input type="text" class="form-control px-3 py-2 bg-light border-0" placeholder="Apartment, suite, etc.">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-muted fs-14 fw-semibold">City</label>
+                                    <input type="text" class="form-control px-3 py-2 bg-light border-0" value="Colombo" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-muted fs-14 fw-semibold">Postal Code</label>
+                                    <input type="text" class="form-control px-3 py-2 bg-light border-0" value="00300" required>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="saveAddress" checked>
+                                        <label class="form-check-label text-muted fs-14" for="saveAddress">
+                                            Save this information for next time
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="text-muted opacity-25 my-5">
+
+                            <div class="d-flex align-items-center gap-2 mb-4">
+                                <i class='bx bx-credit-card text-primary fs-3'></i>
+                                <h4 class="fw-bold mb-0">Payment Method</h4>
+                            </div>
+
+                            <div class="payment-methods mb-4">
+                                <div class="form-check custom-radio border rounded-3 p-3 mb-3 d-flex align-items-center bg-white shadow-sm border-primary">
+                                    <input class="form-check-input ms-1 me-3 fs-5" type="radio" name="paymentMethod" id="creditCard" checked>
+                                    <label class="form-check-label w-100 d-flex justify-content-between align-items-center" for="creditCard">
+                                        <span class="fw-bold text-dark fs-5">Credit / Debit Card</span>
+                                        <div class="d-flex gap-2">
+                                            <i class='bx bxl-visa fs-2 text-primary'></i>
+                                            <i class='bx bxl-mastercard fs-2 text-warning'></i>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <!-- Card Details Form -->
+                                <div class="card-details-form p-4 bg-light rounded-3 mb-4">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label class="form-label text-muted fs-14 fw-semibold">Card Number</label>
+                                            <div class="position-relative">
+                                                <input type="text" class="form-control px-3 py-2 border-0 bg-white" placeholder="0000 0000 0000 0000">
+                                                <i class='bx bx-credit-card position-absolute top-50 end-0 translate-middle-y me-3 text-muted fs-5'></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label text-muted fs-14 fw-semibold">Name on Card</label>
+                                            <input type="text" class="form-control px-3 py-2 border-0 bg-white" placeholder="John Doe">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label text-muted fs-14 fw-semibold">Expiry Date</label>
+                                            <input type="text" class="form-control px-3 py-2 border-0 bg-white" placeholder="MM/YY">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label text-muted fs-14 fw-semibold">CVC</label>
+                                            <div class="position-relative">
+                                                <input type="number" class="form-control px-3 py-2 border-0 bg-white" placeholder="123">
+                                                <i class='bx bx-help-circle position-absolute top-50 end-0 translate-middle-y me-3 text-muted ms-1 fs-5' title="3 digits on back of card"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-check custom-radio border rounded-3 p-3 mb-3 d-flex align-items-center bg-white shadow-sm border-0">
+                                    <input class="form-check-input ms-1 me-3 fs-5" type="radio" name="paymentMethod" id="paypal">
+                                    <label class="form-check-label w-100 d-flex justify-content-between align-items-center" for="paypal">
+                                        <span class="fw-bold text-dark fs-5">PayPal</span>
+                                        <i class='bx bxl-paypal fs-2 text-primary'></i>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check custom-radio border rounded-3 p-3 mb-3 d-flex align-items-center bg-white shadow-sm border-0">
+                                    <input class="form-check-input ms-1 me-3 fs-5" type="radio" name="paymentMethod" id="cod">
+                                    <label class="form-check-label w-100 d-flex justify-content-between align-items-center" for="cod">
+                                        <span class="fw-bold text-dark fs-5">Cash on Delivery</span>
+                                        <i class='bx bx-money fs-2 text-success'></i>
+                                    </label>
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Order Summary -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4 sticky-top" style="top: 100px;">
+                    <div class="card-body p-4 p-lg-5">
+                        <h4 class="fw-bold mb-4">Order Summary</h4>
+                        
+                        <div class="order-items mb-4" style="max-height: 300px; overflow-y: auto;">
+                            <!-- Item 1 -->
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <div class="position-relative">
+                                    <img src="https://images.unsplash.com/photo-1629196914902-1845bb0b8529?q=80&w=400&auto=format&fit=crop" class="img-fluid rounded shadow-sm" style="width: 60px; height: 80px; object-fit: cover;" alt="Book">
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">1</span>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="fw-bold mb-1 fs-14 text-truncate" style="max-width: 150px;">The Atomic Habits</h6>
+                                    <small class="text-muted d-block">James Clear</small>
+                                </div>
+                                <div class="fw-bold text-dark">Rs. 2,100</div>
+                            </div>
+                            
+                            <!-- Item 2 -->
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <div class="position-relative">
+                                    <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=400&auto=format&fit=crop" class="img-fluid rounded shadow-sm" style="width: 60px; height: 80px; object-fit: cover;" alt="Book">
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">2</span>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="fw-bold mb-1 fs-14 text-truncate" style="max-width: 150px;">Madol Doova</h6>
+                                    <small class="text-muted d-block">M. Wickramasinghe</small>
+                                </div>
+                                <div class="fw-bold text-dark">Rs. 1,700</div>
+                            </div>
+                        </div>
+
+                        <hr class="text-muted opacity-25 mb-4">
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Subtotal (3 items)</span>
+                            <span class="fw-medium text-dark">Rs. 3,800</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Shipping</span>
+                            <span class="fw-medium text-dark">Rs. 350</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-4">
+                            <span class="text-muted">Taxes</span>
+                            <span class="fw-medium text-dark">Rs. 0</span>
+                        </div>
+
+                        <hr class="text-muted opacity-25 mb-4">
+
+                        <div class="d-flex justify-content-between align-items-center mb-5">
+                            <span class="fs-5 fw-bold text-dark">Total</span>
+                            <span class="fs-4 fw-bold text-primary">Rs. 4,150</span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary rounded-pill w-100 py-3 shadow mb-3 fs-5 fw-semibold d-flex justify-content-center align-items-center gap-2">
+                            <i class='bx bx-lock-alt'></i> Place Order
+                        </button>
+                        <p class="text-center text-muted fs-12 mb-0">By placing this order, you agree to our Terms of Use and Privacy Policy.</p>
+                        
+                        </form> <!-- End Form spanning from left col -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Simple JS to toggle active class on payment method cards
+        document.querySelectorAll('input[name="paymentMethod"]').forEach((elem) => {
+            elem.addEventListener("change", function(event) {
+                document.querySelectorAll('.custom-radio').forEach(el => {
+                    el.classList.remove('border-primary');
+                    el.classList.add('border-0');
+                });
+                event.target.closest('.custom-radio').classList.add('border-primary');
+                event.target.closest('.custom-radio').classList.remove('border-0');
+                
+                const cardForm = document.querySelector('.card-details-form');
+                if(event.target.id === 'creditCard') {
+                    cardForm.style.display = 'block';
+                } else {
+                    cardForm.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

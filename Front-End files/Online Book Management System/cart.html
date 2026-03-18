@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - OBMS Modern Store</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap"
+        rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/shop.css">
+</head>
+
+<body class="bg-light">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top bg-white border-bottom shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="shop.html">
+                <i class='bx bx-book-reader text-primary fs-3'></i>
+                <span class="brand-text">BookHaven</span>
+            </a>
+            <div class="ms-auto d-flex align-items-center gap-3">
+                <a href="shop.html" class="btn btn-outline-dark rounded-pill fw-medium pe-4 hover-rise"><i
+                        class='bx bx-arrow-back ms-2 me-2'></i> Continue Shopping</a>
+                <a href="user-dashboard.html" class="action-btn position-relative" title="My Account">
+                    <i class='bx bx-user'></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Cart Content -->
+    <section class="py-5" style="margin-top: 80px;">
+        <div class="container">
+            <div class="d-flex align-items-end mb-4">
+                <h2 class="display-6 fw-bold mb-0 me-3 font-playfair text-dark">Your Cart</h2>
+                <span class="text-muted fs-5 fw-medium">(3 items)</span>
+            </div>
+
+            <div class="row g-5">
+                <!-- Shopping Items -->
+                <div class="col-lg-8">
+                    <!-- Cart Item 1 -->
+                    <div
+                        class="card border-0 shadow-sm rounded-4 overflow-hidden p-4 mb-4 product-card bg-white position-relative">
+                        <button
+                            class="btn btn-link text-danger position-absolute top-0 end-0 m-3 px-2 text-decoration-none"
+                            title="Remove"><i class='bx bx-trash fs-4'></i></button>
+                        <div class="row g-4 align-items-center">
+                            <div class="col-md-2 col-4">
+                                <a href="book-details.html">
+                                    <img src="https://images.unsplash.com/photo-1629196914902-1845bb0b8529?q=80&w=200&auto=format&fit=crop"
+                                        class="img-fluid rounded shadow-sm hover-rise" alt="Atomic Habits">
+                                </a>
+                            </div>
+                            <div class="col-md-5 col-8">
+                                <h5 class="fw-bold mb-1"><a href="book-details.html"
+                                        class="text-dark text-decoration-none hover-text-primary">Atomic Habits</a></h5>
+                                <p class="text-muted fs-14 mb-2">James Clear</p>
+                                <span class="badge bg-success-subtle text-success">In Stock</span>
+                            </div>
+                            <div class="col-md-3 col-6 mt-3 mt-md-0">
+                                <div class="input-group" style="width: 120px;">
+                                    <button class="btn btn-outline-secondary border-opacity-25 bg-white py-1"
+                                        type="button"><i class='bx bx-minus fs-6'></i></button>
+                                    <input type="text" class="form-control text-center fw-bold bg-white py-1 fs-6"
+                                        value="1" readonly>
+                                    <button class="btn btn-outline-secondary border-opacity-25 bg-white py-1"
+                                        type="button"><i class='bx bx-plus fs-6'></i></button>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-6 text-end text-md-center mt-3 mt-md-0">
+                                <h5 class="fw-bold text-primary mb-0">Rs. 2,100</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cart Item 2 -->
+                    <div
+                        class="card border-0 shadow-sm rounded-4 overflow-hidden p-4 mb-4 product-card bg-white position-relative">
+                        <button
+                            class="btn btn-link text-danger position-absolute top-0 end-0 m-3 px-2 text-decoration-none"
+                            title="Remove"><i class='bx bx-trash fs-4'></i></button>
+                        <div class="row g-4 align-items-center">
+                            <div class="col-md-2 col-4">
+                                <a href="#">
+                                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=200&auto=format&fit=crop"
+                                        class="img-fluid rounded shadow-sm hover-rise" alt="Amba Yaluwo">
+                                </a>
+                            </div>
+                            <div class="col-md-5 col-8">
+                                <h5 class="fw-bold mb-1"><a href="#"
+                                        class="text-dark text-decoration-none hover-text-primary">Amba Yaluwo</a></h5>
+                                <p class="text-muted fs-14 mb-2">T.B. Ilangaratne</p>
+                                <span class="badge bg-warning-subtle text-warning">Only 2 left!</span>
+                            </div>
+                            <div class="col-md-3 col-6 mt-3 mt-md-0">
+                                <div class="input-group" style="width: 120px;">
+                                    <button class="btn btn-outline-secondary border-opacity-25 bg-white py-1"
+                                        type="button"><i class='bx bx-minus fs-6'></i></button>
+                                    <input type="text" class="form-control text-center fw-bold bg-white py-1 fs-6"
+                                        value="2" readonly>
+                                    <button class="btn btn-outline-secondary border-opacity-25 bg-white py-1"
+                                        type="button"><i class='bx bx-plus fs-6'></i></button>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-6 text-end text-md-center mt-3 mt-md-0">
+                                <h5 class="fw-bold text-primary mb-0">Rs. 1,500</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary Column -->
+                <div class="col-lg-4">
+                    <div class="card border-0 rounded-4 shadow-sm bg-white position-sticky" style="top: 100px;">
+                        <div class="card-body p-4 p-xl-5">
+                            <h4 class="fw-bold mb-4 border-bottom pb-3">Order Summary</h4>
+
+                            <div class="d-flex justify-content-between mb-3 text-muted">
+                                <span>Subtotal (3 items)</span>
+                                <span class="fw-medium text-dark">Rs. 3,600</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3 text-muted">
+                                <span>Shipping</span>
+                                <span class="text-success fw-medium">Free</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-4 text-muted border-bottom pb-4">
+                                <span>Estimated Taxes</span>
+                                <span class="fw-medium text-dark">Rs. 360</span>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mb-5">
+                                <h4 class="fw-bold mb-0">Total</h4>
+                                <h3 class="fw-bold text-primary mb-0">Rs. 3,960</h3>
+                            </div>
+
+                            <div class="d-grid gap-3">
+                                <a href="checkout.html" class="btn btn-primary btn-lg rounded-pill hover-rise fw-bold py-3"><i
+                                        class='bx bx-lock-alt me-2'></i> Secure Checkout</a>
+
+                                <div class="input-group mt-3">
+                                    <input type="text"
+                                        class="form-control hover-rise rounded-start-pill border-end-0 py-2 ps-4"
+                                        placeholder="Promo code">
+                                    <button class="btn btn-dark rounded-end-pill px-4" type="button">Apply</button>
+                                </div>
+                            </div>
+
+                            <div class="text-center mt-4">
+                                <p class="text-muted fs-14 mb-2">We accept</p>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <div class="bg-light px-2 py-1 rounded border"><img
+                                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Former_Visa_%28company%29_logo.svg/1024px-Former_Visa_%28company%29_logo.svg.png"
+                                            style="height: 15px;" alt="Visa"></div>
+                                    <div class="bg-light px-2 py-1 rounded border"><img
+                                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1024px-Mastercard-logo.svg.png"
+                                            style="height: 15px;" alt="Mastercard"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-5 pb-4 mt-5">
+        <div class="container pt-4">
+            <div class="row align-items-center text-white-50">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <small>&copy; 2026 BookHaven | OBMS. All rights reserved.</small>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="shop.html" class="text-white text-decoration-none me-3">Back to Store</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .hover-text-primary:hover {
+            color: var(--primary) !important;
+        }
+    </style>
+</body>
+
+</html>
