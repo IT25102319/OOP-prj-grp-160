@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Lumina Books</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <i class="fa-solid fa-book-open-reader preloader-icon"></i>
+            <div class="preloader-text">Loading</div>
+        </div>
+    </div>
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <a href="index.jsp" class="logo" style="margin-bottom: 3rem;">
+                <i class="fa-solid fa-book-open-reader"></i> Lumina
+            </a>
+
+            <div
+                style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; font-weight: 600;">
+                Main Menu</div>
+            <ul class="category-list" style="margin-bottom: 2rem;">
+                <li class="category-item active"><i class="fa-solid fa-gauge" style="width: 20px;"></i> Dashboard</li>
+                <li class="category-item"><i class="fa-solid fa-book" style="width: 20px;"></i> Manage Books</li>
+                <li class="category-item"><i class="fa-solid fa-users" style="width: 20px;"></i> Users</li>
+                <li class="category-item"><i class="fa-solid fa-cart-arrow-down" style="width: 20px;"></i> Orders</li>
+            </ul>
+
+            <div
+                style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; font-weight: 600;">
+                Settings</div>
+            <ul class="category-list">
+                <li class="category-item"><i class="fa-solid fa-gear" style="width: 20px;"></i> Configuration</li>
+                <li class="category-item"><i class="fa-solid fa-right-from-bracket" style="width: 20px;"></i> Logout
+                </li>
+            </ul>
+
+            <div
+                style="margin-top: auto; display: flex; align-items: center; gap: 1rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+                <img src="https://ui-avatars.com/api/?name=Admin+User&background=4F46E5&color=fff" alt="Admin"
+                    style="width: 40px; height: 40px; border-radius: 50%;">
+                <div>
+                    <div style="font-weight: 600; font-size: 0.95rem;">Admin User</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">System Administrator</div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="admin-main">
+            <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+                <div>
+                    <h1 style="font-size: 1.8rem; margin-bottom: 0.25rem;">Dashboard Overview</h1>
+                    <p style="color: var(--text-muted);">Welcome back! Here's what's happening today.</p>
+                </div>
+                <button class="btn btn-primary" onclick="document.getElementById('addBookModal').style.display='block'">
+                    <i class="fa-solid fa-plus"></i> Add New Book
+                </button>
+
+            </header>
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-title">Total Books</div>
+                    <div class="stat-value">1,248</div>
+                    <div style="color: #10B981; font-size: 0.85rem; font-weight: 500;"><i
+                            class="fa-solid fa-arrow-trend-up"></i> +12 this week</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Active Users</div>
+                    <div class="stat-value">842</div>
+                    <div style="color: #10B981; font-size: 0.85rem; font-weight: 500;"><i
+                            class="fa-solid fa-arrow-trend-up"></i> +5.4% from last month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Pending Orders</div>
+                    <div class="stat-value">34</div>
+                    <div style="color: #F59E0B; font-size: 0.85rem; font-weight: 500;"><i
+                            class="fa-solid fa-circle-exclamation"></i> Requires attention</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Total Revenue</div>
+                    <div class="stat-value">$12.5k</div>
+                    <div style="color: #10B981; font-size: 0.85rem; font-weight: 500;"><i
+                            class="fa-solid fa-arrow-trend-up"></i> +14% from last month</div>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2>Recent Book Inventory</h2>
+                <div class="search-bar" style="margin: 0; max-width: 300px;">
+                    <i class="fa-solid fa-magnifying-glass" style="margin-left: 1rem; color: var(--text-muted);"></i>
+                    <input type="text" placeholder="Search inventory...">
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Book Title</th>
+                            <th>Author</th>
+                            <th>Category</th>
+                            <th>Stock</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: 500;">The Art of Innovation</td>
+                            <td>Tom Kelley</td>
+                            <td>Technology</td>
+                            <td>45</td>
+                            <td><span class="badge badge-success">In Stock</span></td>
+                            <td>
+                                <button class="action-btn"><i class="fa-solid fa-pen"></i></button>
+                                <button class="action-btn action-delete"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">Silent Spring</td>
+                            <td>Rachel Carson</td>
+                            <td>Science</td>
+                            <td>12</td>
+                            <td><span class="badge badge-warning">Low Stock</span></td>
+                            <td>
+                                <button class="action-btn"><i class="fa-solid fa-pen"></i></button>
+                                <button class="action-btn action-delete"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">Design Systems</td>
+                            <td>Alla Kholmatova</td>
+                            <td>Technology</td>
+                            <td>88</td>
+                            <td><span class="badge badge-success">In Stock</span></td>
+                            <td>
+                                <button class="action-btn"><i class="fa-solid fa-pen"></i></button>
+                                <button class="action-btn action-delete"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">Atomic Habits</td>
+                            <td>James Clear</td>
+                            <td>Self-Help</td>
+                            <td>150</td>
+                            <td><span class="badge badge-success">In Stock</span></td>
+                            <td>
+                                <button class="action-btn"><i class="fa-solid fa-pen"></i></button>
+                                <button class="action-btn action-delete"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script src="scripts.js"></script>
+    <div id="addBookModal" class="modal" style="display:none; position:fixed; z-index:100; left:0; top:0; width:100%; height:100%; background-color: rgba(0,0,0,0.5);">
+        <div class="auth-card" style="margin: 10% auto; width: 400px; padding: 2rem; background: var(--surface);">
+            <h2 style="margin-bottom: 1.5rem; color: var(--midnight);">Add New Inventory</h2>
+
+            <form action="AddBookServlet" method="POST">
+                <div class="form-group">
+                    <label>Book Title</label>
+                    <input type="text" name="bookTitle" placeholder="e.g. Clean Code" required>
+                </div>
+                <div class="form-group">
+                    <label>Author</label>
+                    <input type="text" name="bookAuthor" placeholder="e.g. Robert Martin" required>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select name="bookCategory" style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid var(--border);">
+                        <option value="Technology">Technology</option>
+                        <option value="Self-Help">Self-Help</option>
+                        <option value="Business">Business</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Stock Quantity</label>
+                    <input type="number" name="bookStock" placeholder="0" required>
+                </div>
+
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">Save Book</button>
+                    <button type="button" onclick="document.getElementById('addBookModal').style.display='none'" class="btn btn-outline" style="flex: 1;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

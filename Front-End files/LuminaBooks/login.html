@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Lumina Books</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body
+    style="background: url('https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&q=80&w=2000') center/cover no-repeat; position: relative;">
+    <!-- Overlay -->
+    <div
+        style="position: absolute; top:0; left:0; right:0; bottom:0; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(8px); z-index: -1;">
+    </div>
+
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <a href="index.jsp" class="logo"
+                   style="justify-content: center; margin-bottom: 2rem; font-size: 2rem;">
+                    <i class="fa-solid fa-book-open-reader"></i> Lumina
+                </a>
+                <h2>Welcome back</h2>
+                <p>Enter your details to access your account.</p>
+            </div>
+
+            <form onsubmit="event.preventDefault(); window.location.href='admin.jsp';">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="student@university.edu" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; font-size: 0.9rem;">
+                    <label
+                        style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal; cursor: pointer;">
+                        <input type="checkbox" style="width: auto;"> Remember me
+                    </label>
+                    <a href="#" style="color: var(--primary); text-decoration: none; font-weight: 500;">Forgot
+                        password?</a>
+                </div>
+                <button type="submit" class="btn btn-primary"
+                    style="width: 100%; justify-content: center; padding: 0.8rem;">Sign In</button>
+            </form>
+
+            <div class="auth-footer">
+                Don't have an account? <a href="#">Create account</a>
+            </div>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+
+</html>

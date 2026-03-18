@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumina Books | Modern Bookstore</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <i class="fa-solid fa-book-open-reader preloader-icon"></i>
+            <div class="preloader-text">Loading</div>
+        </div>
+    </div>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-book-open-reader"></i> Lumina
+            </a>
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Bestsellers</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                </ul>
+                <div class="nav-actions" style="display: flex; gap: 1rem;">
+                    <a href="login.html" class="btn btn-outline">Sign In</a>
+                    <a href="#" class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i> (0)</a>
+                </div>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+
+    <header class="hero">
+        <h1>Discover Your Next Great Read</h1>
+        <p>Explore thousands of books ranging from thrilling mysteries to insightful biographies. Your journey starts
+            here.</p>
+        <div class="search-bar">
+            <i class="fa-solid fa-magnifying-glass" style="margin-left: 1rem; color: var(--text-muted);"></i>
+            <input type="text" placeholder="Search by title, author, or ISBN...">
+            <button class="btn btn-primary">Search</button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <h3>Categories</h3>
+            <ul class="category-list">
+                <li class="category-item active">All Books</li>
+                <li class="category-item">Fiction</li>
+                <li class="category-item">Non-Fiction</li>
+                <li class="category-item">Science Fiction & Fantasy</li>
+                <li class="category-item">Mystery & Thriller</li>
+                <li class="category-item">Biography</li>
+                <li class="category-item">Technology</li>
+            </ul>
+        </aside>
+
+        <main>
+            <div class="books-header">
+                <h2>Trending Now</h2>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <span style="color: var(--text-muted); font-size: 0.9rem;">Sort by:</span>
+                    <select
+                        style="padding: 0.5rem; border-radius: 8px; border: 1px solid var(--border); font-family: inherit; outline: none;">
+                        <option>Popularity</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Newest Arrivals</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="book-grid" id="book-grid">
+                <!-- Reactively populated via JS, but we'll put some static items for UI demo -->
+                <div class="book-card">
+                    <img src="https://pics.cdn.librarything.com/picsizes/94/50/9450037-b-h1200-w600-pv25_596a55796b41425941724145_v5.jpg"
+                        alt="Book Cover" class="book-cover">
+                    <div class="book-info">
+                        <h3 class="book-title">Madol Doowa</h3>
+                        <p class="book-author">Martin Wikramasinghe</p>
+                        <div class="book-footer">
+                            <span class="book-price">Rs.1300</span>
+                            <button class="btn btn-primary" style="padding: 0.5rem 1rem;"><i
+                                    class="fa-solid fa-plus"></i> Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=600"
+                        alt="Book Cover" class="book-cover">
+                    <div class="book-info">
+                        <h3 class="book-title">Silent Spring</h3>
+                        <p class="book-author">Rachel Carson</p>
+                        <div class="book-footer">
+                            <span class="book-price">$18.50</span>
+                            <button class="btn btn-primary" style="padding: 0.5rem 1rem;"><i
+                                    class="fa-solid fa-plus"></i> Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=600"
+                        alt="Book Cover" class="book-cover">
+                    <div class="book-info">
+                        <h3 class="book-title">Mindscape</h3>
+                        <p class="book-author">Andrea K.</p>
+                        <div class="book-footer">
+                            <span class="book-price">$21.00</span>
+                            <button class="btn btn-primary" style="padding: 0.5rem 1rem;"><i
+                                    class="fa-solid fa-plus"></i> Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <img src="https://images.unsplash.com/photo-1629196914594-e0eb388b1e11?auto=format&fit=crop&q=80&w=600"
+                        alt="Book Cover" class="book-cover">
+                    <div class="book-info">
+                        <h3 class="book-title">Design Systems</h3>
+                        <p class="book-author">Alla Kholmatova</p>
+                        <div class="book-footer">
+                            <span class="book-price">$35.90</span>
+                            <button class="btn btn-primary" style="padding: 0.5rem 1rem;"><i
+                                    class="fa-solid fa-plus"></i> Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&q=80&w=600"
+                        alt="Book Cover" class="book-cover">
+                    <div class="book-info">
+                        <h3 class="book-title">Atomic Habits</h3>
+                        <p class="book-author">James Clear</p>
+                        <div class="book-footer">
+                            <span class="book-price">$19.99</span>
+                            <button class="btn btn-primary" style="padding: 0.5rem 1rem;"><i
+                                    class="fa-solid fa-plus"></i> Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&q=80&w=600"
+                        alt="Book Cover" class="book-cover">
+                    <div class="book-info">
+                        <h3 class="book-title">Deep Work</h3>
+                        <p class="book-author">Cal Newport</p>
+                        <div class="book-footer">
+                            <span class="book-price">$22.50</span>
+                            <button class="btn btn-primary" style="padding: 0.5rem 1rem;"><i
+                                    class="fa-solid fa-plus"></i> Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>
